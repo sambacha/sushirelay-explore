@@ -1,5 +1,5 @@
-import { createReducer } from "@reduxjs/toolkit"
-import { ITransaction } from "types/trojan/tx-model"
+import { createReducer } from '@reduxjs/toolkit';
+import { ITransaction } from 'types/trojan/tx-model';
 import {
   addConfirmed,
   addPending,
@@ -9,82 +9,82 @@ import {
   removePending,
   selectCurrency,
   resetStateTx,
-} from "./actions"
-import { oldTransactionFirst } from "./hooks"
+} from './actions';
+import { oldTransactionFirst } from './hooks';
 
 export interface TrojanTransactionState {
-  selectedCurrencyId: string
+  selectedCurrencyId: string;
   pendings: {
-    [txHash: string]: ITransaction
-  }
+    [txHash: string]: ITransaction;
+  };
   confirmeds: {
-    [txHash: string]: ITransaction
-  }
+    [txHash: string]: ITransaction;
+  };
 }
 
 export const initialState: TrojanTransactionState = {
-  selectedCurrencyId: "",
+  selectedCurrencyId: '',
   pendings: {},
   confirmeds: {},
-}
+};
 
 export default createReducer(initialState, (builder) =>
   builder
     .addCase(resetStateTx, (state) => {
-      state.pendings = initialState.pendings
-      state.confirmeds = initialState.confirmeds
+      state.pendings = initialState.pendings;
+      state.confirmeds = initialState.confirmeds;
     })
     .addCase(selectCurrency, (state, { payload: currencyId }) => {
-      state.selectedCurrencyId = currencyId
+      state.selectedCurrencyId = currencyId;
     })
     .addCase(addPending, (state, { payload: trojanTx }) => {
-      const txValues = Object.values(state.pendings)
+      const txValues = Object.values(state.pendings);
       if (txValues.length > 29) {
-        const txs = state.pendings
-        const sorted = txValues.sort(oldTransactionFirst)
-        delete txs[sorted[0].hash]
-        txs[trojanTx.hash] = trojanTx
-        state.pendings = txs
+        const txs = state.pendings;
+        const sorted = txValues.sort(oldTransactionFirst);
+        delete txs[sorted[0].hash];
+        txs[trojanTx.hash] = trojanTx;
+        state.pendings = txs;
       } else {
-        state.pendings[trojanTx.hash] = { ...trojanTx }
+        state.pendings[trojanTx.hash] = { ...trojanTx };
       }
     })
     .addCase(addConfirmed, (state, { payload: trojanTx }) => {
-      const txValues = Object.values(state.confirmeds)
+      const txValues = Object.values(state.confirmeds);
       if (txValues.length > 29) {
-        const txs = { ...state.confirmeds }
-        const sorted = txValues.sort(oldTransactionFirst)
-        delete txs[sorted[0].hash]
-        txs[trojanTx.hash] = trojanTx
-        state.confirmeds = txs
+        const txs = { ...state.confirmeds };
+        const sorted = txValues.sort(oldTransactionFirst);
+        delete txs[sorted[0].hash];
+        txs[trojanTx.hash] = trojanTx;
+        state.confirmeds = txs;
       } else {
-        state.confirmeds[trojanTx.hash] = { ...trojanTx }
+        state.confirmeds[trojanTx.hash] = { ...trojanTx };
       }
     })
     .addCase(removePending, (state, { payload: trojanTx }) => {
       if (state.pendings?.[trojanTx.hash]) {
-        const txs = state.pendings
-        delete txs[trojanTx.hash]
-        state.pendings = txs
+        const txs = state.pendings;
+        delete txs[trojanTx.hash];
+        state.pendings = txs;
       }
     })
     .addCase(removeConfirmed, (state, { payload: trojanTx }) => {
       if (state.confirmeds?.[trojanTx.hash]) {
-        const txs = state.confirmeds
-        delete txs[trojanTx.hash]
-        state.confirmeds = txs
+        const txs = state.confirmeds;
+        delete txs[trojanTx.hash];
+        state.confirmeds = txs;
       }
     })
     .addCase(loadPendings, (state, { payload: txs }) => {
-      state.pendings = { ...initialState.pendings }
+      state.pendings = { ...initialState.pendings };
       for (const tx of txs) {
-        state.pendings[tx.hash] = tx
+        state.pendings[tx.hash] = tx;
       }
     })
     .addCase(loadConfirmed, (state, { payload: txs }) => {
-      state.confirmeds = { ...initialState.confirmeds }
+      state.confirmeds = { ...initialState.confirmeds };
       for (const tx of txs) {
-        state.confirmeds[tx.hash] = tx
+        state.confirmeds[tx.hash] = tx;
       }
-    })
-)
+    }),
+);

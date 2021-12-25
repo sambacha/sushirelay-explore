@@ -3,7 +3,13 @@ import { ITrojanTx } from '../../models/TransactionSchema';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { Currency, Price } from '@uniswap/sdk-core';
 
-const checkTx = (tx: TransactionResponse, whaleData: any, isV2: boolean, isV3: boolean, isV2Sushi: boolean): ITrojanTx => {
+const checkTx = (
+  tx: TransactionResponse,
+  whaleData: any,
+  isV2: boolean,
+  isV3: boolean,
+  isV2Sushi: boolean,
+): ITrojanTx => {
   return {
     ...tx,
     txHash: tx.hash,
@@ -13,7 +19,7 @@ const checkTx = (tx: TransactionResponse, whaleData: any, isV2: boolean, isV3: b
     links: { etherscan: ENV.ES_TX + tx.hash },
     status: 'pending',
     timestampTx: nowMs(),
-    whaleData
+    whaleData,
   };
 };
 
@@ -24,7 +30,7 @@ const getPrice = (price: Price<Currency, Currency>) => {
     priceTo: price.invert().toSignificant(6),
     priceToInverted: price.toSignificant(6),
     label: `${price.baseCurrency.symbol} per ${price.quoteCurrency.symbol}`,
-    labelInverted: `${price.quoteCurrency.symbol} per ${price.baseCurrency.symbol}`
+    labelInverted: `${price.quoteCurrency.symbol} per ${price.baseCurrency.symbol}`,
   };
 };
 

@@ -1,9 +1,16 @@
 import { Socket } from 'socket.io';
-import { startSocketServer, explorerNS, emmitChange, getAddressFilter, getSpaceFilter } from './utils/_websocket/utils';
+import {
+  startSocketServer,
+  explorerNS,
+  emmitChange,
+  getAddressFilter,
+  getSpaceFilter,
+} from './utils/_websocket/utils';
 import { startMongo, mongoUtils, models } from './utils/mongo/config';
 import { _log } from './utils/configs/utils';
 
-const { UPDATE_ONLY, INSERT_ONLY, FIRST_QUERY, INS_PEND, DEL_PEND, INS_CONF } = mongoUtils;
+const { UPDATE_ONLY, INSERT_ONLY, FIRST_QUERY, INS_PEND, DEL_PEND, INS_CONF } =
+  mongoUtils;
 const { txM, g } = models;
 const serverName = 'web';
 
@@ -85,7 +92,9 @@ const joinToBlocks = (socket: Socket<any>) => {
   socket.on('join_to_blocks', async () => {
     try {
       const { id } = socket;
-      const { _doc } = await g.blocks.findOne({ fullyUpdated: true }, null, { sort: { timestampTx: -1 } });
+      const { _doc } = await g.blocks.findOne({ fullyUpdated: true }, null, {
+        sort: { timestampTx: -1 },
+      });
       console.log('_doc', _doc);
       if (_doc) explorerNS.to(id).emit('last_block', _doc);
     } catch (e: any) {
@@ -104,7 +113,7 @@ const joinToAddress = (socket: Socket<any>) => {
     const _or_filter_dexes = getSpaceFilter(dexSpaces);
 
     const query = {
-      $and: [_or_from_to, _or_filter_dexes]
+      $and: [_or_from_to, _or_filter_dexes],
     };
 
     txM.pending.find(query, null, FIRST_QUERY, (e, docs) => {

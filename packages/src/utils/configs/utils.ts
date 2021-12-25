@@ -24,7 +24,7 @@ const ENV = {
   CORS_ORIGIN: process.env.CORS_ORIGIN || '',
   ES_TX: 'https://etherscan.io/tx/',
   ES_ADDRESS: 'https://etherscan.io/address/',
-  ES_BLOCK: 'https://etherscan.io/block/'
+  ES_BLOCK: 'https://etherscan.io/block/',
 };
 
 const KEYS = {
@@ -32,7 +32,7 @@ const KEYS = {
   GAS_STATION_API_OPT: {},
   BLOCKNATIVE_API_URL: process.env.BLOCKNATIVE_API_URL || '',
   BLOCKNATIVE_API_OPT: {
-    headers: { Authorization: process.env.BLOCKNATIVE_API_KEY || '' }
+    headers: { Authorization: process.env.BLOCKNATIVE_API_KEY || '' },
   },
   MAIN_WS: process.env.MAIN_WS || '',
   INFURA_KEY1: process.env.INFURA_KEY1 || '',
@@ -44,13 +44,13 @@ const KEYS = {
   ALCHEMY_KEY1: process.env.ALCHEMY_KEY1 || '',
   ALCHEMY_KEY2: process.env.ALCHEMY_KEY2 || '',
   GET_BLOCK_KEY: process.env.GET_BLOCK_KEY || '',
-  POKT_KEY: process.env.POKT_KEY || ''
+  POKT_KEY: process.env.POKT_KEY || '',
 };
 
 const ROUTERS = {
   UNIV3: checksum(process.env.UNIV3 || ''),
   UNIV2: checksum(process.env.UNIV2 || ''),
-  SUSHIV2: checksum(process.env.SUSHIV2 || '')
+  SUSHIV2: checksum(process.env.SUSHIV2 || ''),
 };
 
 const TOKEN_LIST_ALL = Array<string>(
@@ -78,7 +78,7 @@ const TOKEN_LIST_ALL = Array<string>(
   process.env.ZAPPER || '',
   process.env.UMA || '',
   process.env.BAZAR || '',
-  process.env.ZERION || ''
+  process.env.ZERION || '',
 );
 
 function getRandomInt(min: number, max: number) {
@@ -88,4 +88,15 @@ function getRandomInt(min: number, max: number) {
   return res;
 }
 
-export { ENV, ROUTERS, KEYS, TOKEN_LIST_ALL, nowDate, nowMs, timeout, _log, checksum, getRandomInt };
+export {
+  ENV,
+  ROUTERS,
+  KEYS,
+  TOKEN_LIST_ALL,
+  nowDate,
+  nowMs,
+  timeout,
+  _log,
+  checksum,
+  getRandomInt,
+};

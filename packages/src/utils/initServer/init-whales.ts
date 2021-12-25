@@ -4,7 +4,8 @@ import { startMongo } from '../mongo/config';
 import { saveWhale } from '../mongo/saveWhale';
 
 const serverName = 'initWhales';
-const URLData = 'https://raw.githubusercontent.com/Uniswap/sybil-list/master/verified.json';
+const URLData =
+  'https://raw.githubusercontent.com/Uniswap/sybil-list/master/verified.json';
 
 const startServer = () => {
   _log.start('---> startServer ', serverName);
@@ -40,7 +41,7 @@ const startAddWhales = () => {
           for (const whale of whalesArray) {
             saveWhale({
               address: whale[0],
-              twitter: whale[1]
+              twitter: whale[1],
             });
           }
         });

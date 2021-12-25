@@ -1,16 +1,16 @@
-import { transparentize } from "polished"
-import React from "react"
-import { Link } from "react-router-dom"
+import { transparentize } from 'polished';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { AlertTriangle } from "react-feather"
-import styled, { css } from "styled-components"
-import { Text } from "rebass"
-import { AutoColumn } from "../Column"
+import { AlertTriangle } from 'react-feather';
+import styled, { css } from 'styled-components';
+import { Text } from 'rebass';
+import { AutoColumn } from '../Column';
 
 export const Wrapper = styled.div`
   position: relative;
   padding: 8px;
-`
+`;
 
 export const ArrowWrapper = styled.div<{ clickable: boolean }>`
   padding: 4px;
@@ -34,18 +34,18 @@ export const ArrowWrapper = styled.div<{ clickable: boolean }>`
           }
         `
       : null}
-`
+`;
 
 export const SectionBreak = styled.div`
   height: 1px;
   width: 100%;
   background-color: ${({ theme }) => theme.bg3};
-`
+`;
 
 export const BottomGrouping = styled.div`
   margin-top: ;
   /* background-color: ${({ theme }) => theme.bg1}; */
-`
+`;
 
 export const ErrorText = styled(Text)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
   color: ${({ theme, severity }) =>
@@ -56,7 +56,7 @@ export const ErrorText = styled(Text)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
       : severity === 1
       ? theme.text1
       : theme.text2};
-`
+`;
 
 export const ErrorPill = styled(Text)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
   border-radius: 8px;
@@ -78,7 +78,7 @@ export const ErrorPill = styled(Text)<{ severity?: 0 | 1 | 2 | 3 | 4 }>`
       : severity === 1
       ? transparentize(0.9, theme.text1)
       : transparentize(0.9, theme.green1)}; */
-`
+`;
 
 export const StyledBalanceMaxMini = styled.button`
   /* height: 22px; */
@@ -105,36 +105,36 @@ export const StyledBalanceMaxMini = styled.button`
     background-color: ${({ theme }) => theme.bg2};
     outline: none;
   }
-`
+`;
 
 export const TruncatedText = styled(Text)`
   text-overflow: ellipsis;
   max-width: 220px;
   overflow: hidden;
   text-align: right;
-`
+`;
 
 // styles
 export const Dots = styled.span`
   &::after {
     display: inline-block;
     animation: ellipsis 1.25s infinite;
-    content: ".";
+    content: '.';
     width: 1em;
     text-align: left;
   }
   @keyframes ellipsis {
     0% {
-      content: ".";
+      content: '.';
     }
     33% {
-      content: "..";
+      content: '..';
     }
     66% {
-      content: "...";
+      content: '...';
     }
   }
-`
+`;
 
 const SwapCallbackErrorInner = styled.div`
   background-color: ${({ theme }) => transparentize(0.9, theme.red1)};
@@ -152,7 +152,7 @@ const SwapCallbackErrorInner = styled.div`
     margin: 0;
     font-weight: 500;
   }
-`
+`;
 
 const SwapCallbackErrorInnerAlertTriangle = styled.div`
   background-color: ${({ theme }) => transparentize(0.9, theme.red1)};
@@ -163,7 +163,7 @@ const SwapCallbackErrorInnerAlertTriangle = styled.div`
   border-radius: 12px;
   min-width: 48px;
   height: 48px;
-`
+`;
 
 export function SwapCallbackError({ error }: { error: string }) {
   return (
@@ -171,9 +171,9 @@ export function SwapCallbackError({ error }: { error: string }) {
       <SwapCallbackErrorInnerAlertTriangle>
         <AlertTriangle size={24} />
       </SwapCallbackErrorInnerAlertTriangle>
-      <p style={{ wordBreak: "break-word" }}>{error}</p>
+      <p style={{ wordBreak: 'break-word' }}>{error}</p>
     </SwapCallbackErrorInner>
-  )
+  );
 }
 
 export const SwapShowAcceptChanges = styled(AutoColumn)`
@@ -182,12 +182,12 @@ export const SwapShowAcceptChanges = styled(AutoColumn)`
   padding: 0.5rem;
   border-radius: 12px;
   margin-top: 8px;
-`
+`;
 export const Separator = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${({ theme }) => theme.bg2};
-`
+`;
 
 export const V2TradeAlertWrapper = styled(Link)`
   background-color: ${({ theme }) => theme.bg2};
@@ -198,4 +198,4 @@ export const V2TradeAlertWrapper = styled(Link)`
   margin-right: 0.5rem;
   padding: 0 0.25rem 0 0.5rem;
   text-decoration: none !important;
-`
+`;

@@ -1,5 +1,9 @@
 import { startMongo, models } from './utils/mongo/config';
-import { escan2, MAIN_WS_PROVIDER, providersForLC } from './utils/web3/providers';
+import {
+  escan2,
+  MAIN_WS_PROVIDER,
+  providersForLC,
+} from './utils/web3/providers';
 import { _log, timeout } from './utils/configs/utils';
 import { getPendingTxResponse } from './utils/web3/getTransactions';
 import { proccessPending as pendingTx_uni_sushi } from './swapsDecoders/_uni_sushi/pending';
@@ -8,9 +12,18 @@ import { pendingToConfirm, trashToconfirm } from './utils/mongo/saveConfirmed';
 const { txM, g } = models;
 const { whales } = g;
 const serverName = 'qnConfirmed';
-const SwV2SH = ['0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822', '0x000000000000000000000000d9e1ce17f2641f24ae83637ab66a2cca9c378b9f'];
-const SwapV2 = ['0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822', '0x0000000000000000000000007a250d5630b4cf539739df2c5dacb4c659f2488d'];
-const SwapV3 = ['0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67', '0x000000000000000000000000e592427a0aece92de3edee1f18e0157c05861564'];
+const SwV2SH = [
+  '0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822',
+  '0x000000000000000000000000d9e1ce17f2641f24ae83637ab66a2cca9c378b9f',
+];
+const SwapV2 = [
+  '0xd78ad95fa46c994b6551d0da85fc275fe613ce37657fb8d5e3d130840159d822',
+  '0x0000000000000000000000007a250d5630b4cf539739df2c5dacb4c659f2488d',
+];
+const SwapV3 = [
+  '0xc42079f94a6350d7e6235f29174924f928cc2ac818eb64fed8004e115fbcca67',
+  '0x000000000000000000000000e592427a0aece92de3edee1f18e0157c05861564',
+];
 
 let whalesCache = new Array<any>();
 
@@ -38,11 +51,14 @@ const listenRouter = async (filter: Array<any>, isV2: boolean) => {
   try {
     MAIN_WS_PROVIDER.on(
       {
-        topics: filter
+        topics: filter,
       },
       async (data: any) => {
         const hash = data.transactionHash;
-        const [knownTx_, knownTx_g_] = await Promise.all([txM.pending.findOne({ hash }, null, {}), g.trash.findOne({ hash }, null, {})]);
+        const [knownTx_, knownTx_g_] = await Promise.all([
+          txM.pending.findOne({ hash }, null, {}),
+          g.trash.findOne({ hash }, null, {}),
+        ]);
         if (knownTx_) {
           const knownTx = knownTx_._doc;
           let nTx = { ...knownTx };
@@ -61,12 +77,14 @@ const listenRouter = async (filter: Array<any>, isV2: boolean) => {
 
         const tx = await getPendingTxResponse(hash, providersForLC, escan2);
         if (tx) {
-          const whaleData = whalesCache.find((w) => (w ? w.address.toLowerCase() === tx.from.toLowerCase() : false));
+          const whaleData = whalesCache.find((w) =>
+            w ? w.address.toLowerCase() === tx.from.toLowerCase() : false,
+          );
           pendingTx_uni_sushi(tx, whaleData, true, providersForLC);
         } else {
           _log.error('getPendingTxResponse ', hash, 'not found confirmed tx?');
         }
-      }
+      },
     );
   } catch (e: any) {
     _log.error('listen V2 catch ', e);

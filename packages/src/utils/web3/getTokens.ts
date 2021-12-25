@@ -9,21 +9,40 @@ import { saveToken, updateToken } from '../mongo/saveToken';
 
 const newTokenUni = (data: any): Token | null => {
   try {
-    if (data) return new Token(MAINNET, checksum(data.address), data.decimals, data.symbol, data.name);
+    if (data)
+      return new Token(
+        MAINNET,
+        checksum(data.address),
+        data.decimals,
+        data.symbol,
+        data.name,
+      );
   } catch (e: any) {}
   return null;
 };
 
 const newTokenSushi = (data: any): TokenSushi | null => {
   try {
-    if (data) return new TokenSushi(MAINNET, checksum(data.address), Number(data.decimals), data.symbol, data.name);
+    if (data)
+      return new TokenSushi(
+        MAINNET,
+        checksum(data.address),
+        Number(data.decimals),
+        data.symbol,
+        data.name,
+      );
   } catch (e: any) {
     _log.warn('newTokenSushi catch', data);
   }
   return null;
 };
 
-const getTokens = async (checkedPath: Array<string>, pName: string, dexSpace: string, providers: Array<any>) => {
+const getTokens = async (
+  checkedPath: Array<string>,
+  pName: string,
+  dexSpace: string,
+  providers: Array<any>,
+) => {
   try {
     if (checkedPath && pName && dexSpace) {
       let tks = [];
@@ -76,7 +95,10 @@ const getTokens = async (checkedPath: Array<string>, pName: string, dexSpace: st
       if (tks.length === checkedPath.length) {
         return tks;
       } else {
-        _log.warn('getTokens tks.length === checkedPath.length', tks.length === checkedPath.length);
+        _log.warn(
+          'getTokens tks.length === checkedPath.length',
+          tks.length === checkedPath.length,
+        );
       }
     } else {
       _log.error('getTokens data error', checkedPath, pName, dexSpace);

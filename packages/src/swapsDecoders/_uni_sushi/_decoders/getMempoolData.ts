@@ -4,7 +4,11 @@ import { V3_SWAP_FNAME } from '../../../utils/web3/utils';
 
 const { EO, EOS, EI, EIS } = V3_SWAP_FNAME;
 
-export const getMempoolData = async (tx: ITrojanTx, tokens: Array<any>, dexSpace: string) => {
+export const getMempoolData = async (
+  tx: ITrojanTx,
+  tokens: Array<any>,
+  dexSpace: string,
+) => {
   try {
     const { value, mempoolData } = tx;
     const { decodedData, txMethod } = mempoolData;
@@ -16,8 +20,12 @@ export const getMempoolData = async (tx: ITrojanTx, tokens: Array<any>, dexSpace
     let amountOut = null;
 
     if (isExactOutV3 || isExactInV3) {
-      amountIn = isExactOutV3 ? decodedData['amountInMaximum'] : decodedData['amountIn'];
-      amountOut = isExactOutV3 ? decodedData['amountOut'] : decodedData['amountOutMinimum'];
+      amountIn = isExactOutV3
+        ? decodedData['amountInMaximum']
+        : decodedData['amountIn'];
+      amountOut = isExactOutV3
+        ? decodedData['amountOut']
+        : decodedData['amountOutMinimum'];
     } else {
       amountIn = decodedData['amountIn'] || decodedData['amountInMax'] || value;
       amountOut = decodedData['amountOut'] || decodedData['amountOutMin'];
@@ -32,7 +40,7 @@ export const getMempoolData = async (tx: ITrojanTx, tokens: Array<any>, dexSpace
         amountOut: amountOut.toString(),
         input: t0,
         output: t1,
-        tokens
+        tokens,
       };
     }
   } catch (e: any) {

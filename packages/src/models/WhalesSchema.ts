@@ -8,10 +8,10 @@ const WhalesSchema = new Schema(
     twitter: {
       timestamp: Number,
       tweetID: String,
-      handle: String
-    }
+      handle: String,
+    },
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { WhalesSchema };

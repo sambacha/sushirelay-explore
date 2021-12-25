@@ -1,22 +1,22 @@
-import { createReducer } from "@reduxjs/toolkit"
-import { clearBlock, setBlock } from "./actions"
+import { createReducer } from '@reduxjs/toolkit';
+import { clearBlock, setBlock } from './actions';
 
 export interface TrojanBlocksState {
-  readonly block: any
+  readonly block: any;
 }
 
 const initialState: TrojanBlocksState = {
   block: null,
-}
+};
 
 export default createReducer<TrojanBlocksState>(initialState, (builder) =>
   builder
     .addCase(setBlock, (state, { payload: { block } }) => {
       // the case where we have to swap the order
-      state.block = block
+      state.block = block;
     })
 
     .addCase(clearBlock, (state) => {
-      state.block = null
-    })
-)
+      state.block = null;
+    }),
+);

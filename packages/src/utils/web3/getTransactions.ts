@@ -1,6 +1,10 @@
 import { _log } from '../configs/utils';
 
-const getPendingTxResponse = async (hash: string, providers: Array<any>, escan: any) => {
+const getPendingTxResponse = async (
+  hash: string,
+  providers: Array<any>,
+  escan: any,
+) => {
   try {
     const _txResponse = await getFromBackupProviders(hash, providers, escan);
     return _txResponse;
@@ -10,7 +14,11 @@ const getPendingTxResponse = async (hash: string, providers: Array<any>, escan: 
   return null;
 };
 
-const getFromBackupProviders = async (hash: string, providers: Array<any>, escan: any) => {
+const getFromBackupProviders = async (
+  hash: string,
+  providers: Array<any>,
+  escan: any,
+) => {
   try {
     const txResponse = await goGetIt(hash, providers, escan);
     if (txResponse) {

@@ -1,17 +1,22 @@
-import Tooltip from "components/Tooltip"
-import React, { useState } from "react"
-import styled from "styled-components/macro"
+import Tooltip from 'components/Tooltip';
+import React, { useState } from 'react';
+import styled from 'styled-components/macro';
 
-const TextWrapper = styled.span<{ margin: boolean; link?: boolean; fontSize?: string; adjustSize?: boolean }>`
+const TextWrapper = styled.span<{
+  margin: boolean;
+  link?: boolean;
+  fontSize?: string;
+  adjustSize?: boolean;
+}>`
   cursor: auto;
-  margin-left: ${({ margin }) => margin && "4px"};
+  margin-left: ${({ margin }) => margin && '4px'};
   color: ${({ theme, link }) => (link ? theme.blue1 : theme.text1)};
-  font-size: ${({ fontSize }) => fontSize ?? "inherit"};
+  font-size: ${({ fontSize }) => fontSize ?? 'inherit'};
 
   @media screen and (max-width: 600px) {
-    font-size: ${({ adjustSize }) => adjustSize && "12px"};
+    font-size: ${({ adjustSize }) => adjustSize && '12px'};
   }
-`
+`;
 
 const HoverInlineText = ({
   text,
@@ -22,17 +27,17 @@ const HoverInlineText = ({
   link,
   ...rest
 }: {
-  text: string
-  maxCharacters?: number
-  margin?: boolean
-  adjustSize?: boolean
-  fontSize?: string
-  link?: boolean
+  text: string;
+  maxCharacters?: number;
+  margin?: boolean;
+  adjustSize?: boolean;
+  fontSize?: string;
+  link?: boolean;
 }) => {
-  const [showHover, setShowHover] = useState(false)
+  const [showHover, setShowHover] = useState(false);
 
   if (!text) {
-    return <span />
+    return <span />;
   }
 
   if (text.length > maxCharacters) {
@@ -47,17 +52,23 @@ const HoverInlineText = ({
           fontSize={fontSize}
           {...rest}
         >
-          {" " + text.slice(0, maxCharacters - 1) + "..."}
+          {' ' + text.slice(0, maxCharacters - 1) + '...'}
         </TextWrapper>
       </Tooltip>
-    )
+    );
   }
 
   return (
-    <TextWrapper margin={margin} adjustSize={adjustSize} link={link} fontSize={fontSize} {...rest}>
+    <TextWrapper
+      margin={margin}
+      adjustSize={adjustSize}
+      link={link}
+      fontSize={fontSize}
+      {...rest}
+    >
       {text}
     </TextWrapper>
-  )
-}
+  );
+};
 
-export default HoverInlineText
+export default HoverInlineText;

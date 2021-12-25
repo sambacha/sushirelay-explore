@@ -1,9 +1,9 @@
-import React from "react"
-import { useContext, useState } from "react"
-import { Repeat } from "react-feather"
-import { Text } from "rebass"
-import { ThemeContext } from "styled-components"
-import styled from "styled-components"
+import React from 'react';
+import { useContext, useState } from 'react';
+import { Repeat } from 'react-feather';
+import { Text } from 'rebass';
+import { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledBalanceMaxMini = styled.button`
   height: 22px;
@@ -29,13 +29,13 @@ const StyledBalanceMaxMini = styled.button`
     background-color: ${({ theme }) => theme.bg3};
     outline: none;
   }
-`
+`;
 
 interface TradePricePredictionProps {
-  formattedPriceFrom: string
-  formattedPriceTo: string
-  label: string
-  labelInverted: string
+  formattedPriceFrom: string;
+  formattedPriceTo: string;
+  label: string;
+  labelInverted: string;
 }
 
 export default function TradePricePrediction({
@@ -44,24 +44,28 @@ export default function TradePricePrediction({
   label,
   labelInverted,
 }: TradePricePredictionProps) {
-  const [showInverted, setShowInverted] = useState<boolean>(false)
+  const [showInverted, setShowInverted] = useState<boolean>(false);
 
-  const theme = useContext(ThemeContext)
+  const theme = useContext(ThemeContext);
 
-  const formattedPrice = showInverted ? formattedPriceFrom : formattedPriceTo
-  const labelFormatted = showInverted ? label : labelInverted
+  const formattedPrice = showInverted ? formattedPriceFrom : formattedPriceTo;
+  const labelFormatted = showInverted ? label : labelInverted;
 
   return (
     <Text
       fontWeight={500}
       fontSize={14}
       color={theme.text1}
-      style={{ justifyContent: "center", alignItems: "center", display: "flex" }}
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+      }}
     >
-      {formattedPrice ?? "-"} {labelFormatted}
+      {formattedPrice ?? '-'} {labelFormatted}
       <StyledBalanceMaxMini onClick={() => setShowInverted(!showInverted)}>
         <Repeat size={14} />
       </StyledBalanceMaxMini>
     </Text>
-  )
+  );
 }

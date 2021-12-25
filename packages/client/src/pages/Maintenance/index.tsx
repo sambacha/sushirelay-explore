@@ -1,28 +1,28 @@
-import React from "react"
-import { Row, Col, Grid } from "react-styled-flexboxgrid"
-import { Text } from "rebass/styled-components"
-import { ExternalLink } from "theme"
-import LogoDark from "assets/svg/logo_white.svg"
-import { DataCard, CardSection } from "components/Common/styled"
-import { AutoColumn } from "components/Column"
-import { UniIcon } from "../styled"
+import React from 'react';
+import { Row, Col, Grid } from 'react-styled-flexboxgrid';
+import { Text } from 'rebass/styled-components';
+import { ExternalLink } from 'theme';
+import LogoDark from 'assets/svg/logo_white.svg';
+import { DataCard, CardSection } from 'components/Common/styled';
+import { AutoColumn } from 'components/Column';
+import { UniIcon } from '../styled';
 
 export default function Maintenance({}) {
   return (
     <>
       <Grid
         style={{
-          paddingRight: "0.8rem",
-          paddingLeft: "0.8rem",
-          paddingTop: "0.5rem",
-          width: "100%",
+          paddingRight: '0.8rem',
+          paddingLeft: '0.8rem',
+          paddingTop: '0.5rem',
+          width: '100%',
         }}
       >
         <Row center="xs">
           <Col xs={12} sm={12} md={4} lg={4}></Col>
           <Col xs={12} sm={12} md={4} lg={4}>
             <Row center="xs">
-              <Text textAlign="center" style={{ padding: "0rem" }}>
+              <Text textAlign="center" style={{ padding: '0rem' }}>
                 <DataCard>
                   <CardSection>
                     <AutoColumn gap="md">
@@ -31,13 +31,16 @@ export default function Maintenance({}) {
                       </Text>
 
                       <UniIcon>
-                        <img width={"30%"} src={LogoDark} alt="logo" />
+                        <img width={'30%'} src={LogoDark} alt="logo" />
                       </UniIcon>
                       <Text fontWeight={400} fontSize={14}>
-                        <br></br> Join our telegram to complain to devs plz <br></br>
+                        <br></br> Join our telegram to complain to devs plz{' '}
+                        <br></br>
                         <br></br> Sushiswap Relay Explorer <br></br>
                       </Text>
-                      <ExternalLink href={"https://t.me/manifoldfinance"}>[Telegram]</ExternalLink>
+                      <ExternalLink href={'https://t.me/manifoldfinance'}>
+                        [Telegram]
+                      </ExternalLink>
                     </AutoColumn>
                   </CardSection>
                 </DataCard>
@@ -48,5 +51,5 @@ export default function Maintenance({}) {
         </Row>
       </Grid>
     </>
-  )
+  );
 }

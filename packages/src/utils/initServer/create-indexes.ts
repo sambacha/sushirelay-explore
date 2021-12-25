@@ -1,5 +1,11 @@
 import { _log } from '../configs/utils';
-import { TokenSchema, TransactionSchema, BlockSchema, WhalesSchema, HashSchema } from '../../models/index';
+import {
+  TokenSchema,
+  TransactionSchema,
+  BlockSchema,
+  WhalesSchema,
+  HashSchema,
+} from '../../models/index';
 import { models, startMongo } from '../mongo/config';
 
 const { g, txM } = models;

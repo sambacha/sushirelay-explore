@@ -13,7 +13,12 @@ const { hashes } = g;
 
 const pName = 'qnPending_v3_multiswap';
 
-export const handleMultiSwap = async (tx: ITrojanTx, dexSpace: string, directConfirm: boolean, providers: Array<any>) => {
+export const handleMultiSwap = async (
+  tx: ITrojanTx,
+  dexSpace: string,
+  directConfirm: boolean,
+  providers: Array<any>,
+) => {
   try {
     const { decodedData } = tx.mempoolData;
     let fromTokenAddress = '';
@@ -23,7 +28,8 @@ export const handleMultiSwap = async (tx: ITrojanTx, dexSpace: string, directCon
     for (let i = 0; i < decodedData.length; i++) {
       const internalCall = await getV3InternalSwap(decodedData[i]);
       if (internalCall) {
-        const { decodedInnerData, checkedPath, innerMethod, fee } = internalCall;
+        const { decodedInnerData, checkedPath, innerMethod, fee } =
+          internalCall;
         if (_V3_FNAME_ONLY_SWAP.indexOf(innerMethod) >= 0) {
           if (fromTokenAddress === '') {
             fromTokenAddress = checkedPath[0];
@@ -38,17 +44,22 @@ export const handleMultiSwap = async (tx: ITrojanTx, dexSpace: string, directCon
                 mempoolData: {
                   txMethod: innerMethod,
                   decodedData: decodedInnerData,
-                  fee
-                }
+                  fee,
+                },
               },
               tks,
-              dexSpace
+              dexSpace,
             );
             if (innerCall) {
               multiSwapCalls.push(innerCall);
             }
           } else {
-            _log.warn('handleMultiSwap', dexSpace, tx.hash, 'not tks or tks.length !== checkedPath.length');
+            _log.warn(
+              'handleMultiSwap',
+              dexSpace,
+              tx.hash,
+              'not tks or tks.length !== checkedPath.length',
+            );
           }
         }
       }
@@ -62,14 +73,14 @@ export const handleMultiSwap = async (tx: ITrojanTx, dexSpace: string, directCon
           mempoolData: {
             ...tx.mempoolData,
             multiSwapCalls,
-            ...swapCall
-          }
+            ...swapCall,
+          },
         };
         if (directConfirm) {
           new hashes({
             hash: tx.hash,
             txHash: tx.hash,
-            timestampTx: nowMs()
+            timestampTx: nowMs(),
           }).save(async (e: any) => {
             if (!e) {
               createConfirm(toCreate, 'directConfirm');

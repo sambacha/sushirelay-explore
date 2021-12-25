@@ -16,7 +16,7 @@ const BlockHeaderSchema = new Schema({
   stateRoot: String,
   receiptRoot: String,
   timestamp: String,
-  number: Number
+  number: Number,
 });
 
 const BlockNativeSchema = new Schema({
@@ -26,14 +26,14 @@ const BlockNativeSchema = new Schema({
   maxPrice: Number,
   currentBlockNumber: Number,
   msSinceLastBlock: Number,
-  blockPrices: Array
+  blockPrices: Array,
 });
 
 const BlockGasSchema = new Schema({
   fastest: Number,
   fast: Number,
   safeLow: Number,
-  average: Number
+  average: Number,
 });
 
 const BlockSchema = new Schema(
@@ -46,9 +46,9 @@ const BlockSchema = new Schema(
     blockHeader: BlockHeaderSchema,
     responseDataGas: BlockGasSchema,
     by: String,
-    timestampTx: Number
+    timestampTx: Number,
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { BlockSchema };

@@ -4,9 +4,9 @@ const HashSchema = new Schema(
   {
     hash: String,
     txHash: String,
-    timestampTx: Number
+    timestampTx: Number,
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { HashSchema };

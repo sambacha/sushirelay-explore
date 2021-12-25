@@ -1,6 +1,10 @@
 import { checksum, _log } from '../../../utils/configs/utils';
 import { iUniV3Router } from '../../../utils/web3/abis-interfaces';
-import { V3_SWAP_SIGS, _V3_FNAME_ONLY_SWAP, _V3_SIGS_ONLY_SWAP } from '../../../utils/web3/utils';
+import {
+  V3_SWAP_SIGS,
+  _V3_FNAME_ONLY_SWAP,
+  _V3_SIGS_ONLY_SWAP,
+} from '../../../utils/web3/utils';
 
 const { exactInputSig, exactOutputSig } = V3_SWAP_SIGS;
 
@@ -11,7 +15,10 @@ async function getV3InternalSwap(decodeMe: string) {
 
     if (isSwap >= 0) {
       const innerMethod = _V3_FNAME_ONLY_SWAP[isSwap];
-      const decodedInnerData = iUniV3Router.decodeFunctionData(innerMethod, decodeMe)[0];
+      const decodedInnerData = iUniV3Router.decodeFunctionData(
+        innerMethod,
+        decodeMe,
+      )[0];
 
       let fromTokenAddress = null;
       let midTokenAddress = null;
@@ -46,7 +53,7 @@ async function getV3InternalSwap(decodeMe: string) {
           checkedPath,
           innerMethod,
           decodedInnerData,
-          fee
+          fee,
         };
       }
       //

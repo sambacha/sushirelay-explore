@@ -19,9 +19,9 @@ const TokenSchema = new Schema(
     isGeneral: Boolean,
     isV2: Boolean,
     isV3: Boolean,
-    isV2Sushi: Boolean
+    isV2Sushi: Boolean,
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { TokenSchema };

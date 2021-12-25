@@ -1,9 +1,9 @@
-import { Story } from "@storybook/react/types-6-0"
-import React from "react"
+import { Story } from '@storybook/react/types-6-0';
+import React from 'react';
 // import Row, { RowFixed } from 'components/Row'
-import styled from "styled-components/macro"
-import Component, { LineChartProps } from "./"
-import { dummyData } from "./data"
+import styled from 'styled-components/macro';
+import Component, { LineChartProps } from './';
+import { dummyData } from './data';
 // import { AutoColumn } from 'components/Column'
 // import { TYPE } from 'theme'
 // import DoubleCurrencyLogo from 'components/DoubleLogo'
@@ -17,13 +17,13 @@ const Wrapper = styled.div`
   & > * {
     font-size: 1em;
   }
-`
+`;
 
 export default {
-  title: "Charts",
+  title: 'Charts',
   argTypes: {
-    disabled: { control: { type: "boolean" } },
-    onClick: { action: "clicked" },
+    disabled: { control: { type: 'boolean' } },
+    onClick: { action: 'clicked' },
   },
   decorators: [
     (Component: Story) => (
@@ -32,12 +32,14 @@ export default {
       </Wrapper>
     ),
   ],
-}
+};
 
-const Template: Story<LineChartProps> = (args) => <Component {...args}>{args.children}</Component>
+const Template: Story<LineChartProps> = (args) => (
+  <Component {...args}>{args.children}</Component>
+);
 
-export const Basic = Template.bind({})
-Basic.args = { data: dummyData }
+export const Basic = Template.bind({});
+Basic.args = { data: dummyData };
 
 // const Full = () => {
 //   const [value, setValue] = useState<number | undefined>(dummyData[dummyData.length - 1].value)

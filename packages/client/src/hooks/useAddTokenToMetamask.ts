@@ -1,26 +1,31 @@
-import { getTokenLogoURL } from "./../components/CurrencyLogo/index"
-import { wrappedCurrency } from "utils/wrappedCurrency"
-import { Currency, Token } from "@uniswap/sdk-core"
-import { useCallback, useState } from "react"
-import { useActiveWeb3React } from "hooks/web3"
+import { getTokenLogoURL } from './../components/CurrencyLogo/index';
+import { wrappedCurrency } from 'utils/wrappedCurrency';
+import { Currency, Token } from '@uniswap/sdk-core';
+import { useCallback, useState } from 'react';
+import { useActiveWeb3React } from 'hooks/web3';
 
 export default function useAddTokenToMetamask(
-  currencyToAdd: Currency | undefined
+  currencyToAdd: Currency | undefined,
 ): { addToken: () => void; success: boolean | undefined } {
-  const { library, chainId } = useActiveWeb3React()
+  const { library, chainId } = useActiveWeb3React();
 
-  const token: Token | undefined = wrappedCurrency(currencyToAdd, chainId)
+  const token: Token | undefined = wrappedCurrency(currencyToAdd, chainId);
 
-  const [success, setSuccess] = useState<boolean | undefined>()
+  const [success, setSuccess] = useState<boolean | undefined>();
 
   const addToken = useCallback(() => {
-    if (library && library.provider.isMetaMask && library.provider.request && token) {
+    if (
+      library &&
+      library.provider.isMetaMask &&
+      library.provider.request &&
+      token
+    ) {
       library.provider
         .request({
-          method: "wallet_watchAsset",
+          method: 'wallet_watchAsset',
           params: {
             //@ts-ignore // need this for incorrect ethers provider type
-            type: "ERC20",
+            type: 'ERC20',
             options: {
               address: token.address,
               symbol: token.symbol,
@@ -30,13 +35,13 @@ export default function useAddTokenToMetamask(
           },
         })
         .then((success) => {
-          setSuccess(success)
+          setSuccess(success);
         })
-        .catch(() => setSuccess(false))
+        .catch(() => setSuccess(false));
     } else {
-      setSuccess(false)
+      setSuccess(false);
     }
-  }, [library, token])
+  }, [library, token]);
 
-  return { addToken, success }
+  return { addToken, success };
 }

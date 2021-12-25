@@ -1,0 +1,10 @@
+dist/
+build/
+*.min.js
+*.d.ts
+*.json
+*.html
+*.css
+*.scss
+client_build/
+tmp/

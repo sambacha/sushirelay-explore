@@ -12,8 +12,8 @@ const SOCKET_OPTS = {
   cors: {
     origin: process.env.CORS_ORIGIN || 'http://137.184.198.60/',
     methods: ['GET', 'POST'],
-    credentials: false
-  }
+    credentials: false,
+  },
 };
 
 const SOCKET_PORT = process.env.PORT || 3001;
@@ -23,7 +23,8 @@ let explorerNS: Namespace<any>;
 const emmitChange = (_ACTION: string, fullDocument: any) => {
   try {
     if (fullDocument && _ACTION) {
-      const { fromTokenAddress, toTokenAddress, isV2, isV3, isV2Sushi } = fullDocument;
+      const { fromTokenAddress, toTokenAddress, isV2, isV3, isV2Sushi } =
+        fullDocument;
       const target = isV2 ? 'v2' : isV3 ? 'v3' : isV2Sushi ? 'v2sh' : null;
 
       if (target) {
@@ -50,7 +51,7 @@ const getSpaceFilter = (dexSpaces: any) => {
       array.push({ isV2Sushi: true });
     }
     return {
-      $or: array
+      $or: array,
     };
   } catch (e: any) {
     _log.error('getSpaceFilter catch', e);
@@ -63,13 +64,13 @@ const getAddressFilter = (address: string) => {
     return {
       $or: [
         {
-          fromTokenAddress: address
+          fromTokenAddress: address,
         },
         {
-          toTokenAddress: address
-        }
+          toTokenAddress: address,
+        },
         // TODO: in front { checkedPath: address }
-      ]
+      ],
     };
   } catch (e: any) {
     _log.error('getAddressFilter catch', e);
@@ -89,11 +90,20 @@ const startSocketServer = async (serverName: string): Promise<boolean> => {
     });
 
     server.listen(SOCKET_PORT, () => {
-      _log.ready(`${serverName} on SOCKET_PORT ${SOCKET_PORT} CORS ${SOCKET_OPTS.cors.origin}`, 'WebApp server on: http://localhost:' + SOCKET_PORT);
+      _log.ready(
+        `${serverName} on SOCKET_PORT ${SOCKET_PORT} CORS ${SOCKET_OPTS.cors.origin}`,
+        'WebApp server on: http://localhost:' + SOCKET_PORT,
+      );
       explorerNS = io.of('/explorer');
       resolve(true);
     });
   });
 };
 
-export { explorerNS, startSocketServer, emmitChange, getSpaceFilter, getAddressFilter };
+export {
+  explorerNS,
+  startSocketServer,
+  emmitChange,
+  getSpaceFilter,
+  getAddressFilter,
+};

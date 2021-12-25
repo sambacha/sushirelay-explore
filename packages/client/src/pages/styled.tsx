@@ -1,20 +1,20 @@
-import { Text } from "rebass"
-import styled, { keyframes } from "styled-components"
+import { Text } from 'rebass';
+import styled, { keyframes } from 'styled-components';
 export const StandardPageWrapper = styled.div`
   padding-top: 160px;
   width: 100%;
-`
+`;
 export const ClickableText = styled(Text)`
   :hover {
     cursor: pointer;
   }
   color: ${({ theme }) => theme.primary1};
-`
+`;
 export const Wrapper = styled.div`
   position: relative;
   width: 100%;
   overflow: auto;
-`
+`;
 
 export const rotate = keyframes`
   from {
@@ -23,7 +23,7 @@ export const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`
+`;
 
 export const UniIcon = styled.div`
   animation: ${rotate} linear 1800ms;
@@ -31,7 +31,7 @@ export const UniIcon = styled.div`
   :hover {
     animation: infinite ${rotate} linear 1400ms;
   }
-`
+`;
 
 export const ButtonRefrash = styled.button`
   position: relative;
@@ -54,7 +54,7 @@ export const ButtonRefrash = styled.button`
   > * {
     stroke: ${({ theme }) => theme.blue1};
   }
-`
+`;
 export const ButtonRefrashPad = styled.button`
   position: relative;
   border: none;
@@ -76,4 +76,4 @@ export const ButtonRefrashPad = styled.button`
   > * {
     stroke: ${({ theme }) => theme.blue1};
   }
-`
+`;

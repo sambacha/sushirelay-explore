@@ -9,7 +9,7 @@ const saveWhale = async (whale: any) => {
       address: checksum(whale.address),
       hashAddress: checksum(whale.address),
       twitter: whale.twitter.twitter,
-      timestampTx: nowMs()
+      timestampTx: nowMs(),
     };
 
     new g.whales(w).save((e: any, doc: any) => {

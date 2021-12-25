@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { TYPE, ExternalLink } from "../../theme"
-import { RowFixed } from "../Row"
-import useScrollPosition from "@react-hook/window-scroll"
+import React from 'react';
+import styled from 'styled-components';
+import { TYPE, ExternalLink } from '../../theme';
+import { RowFixed } from '../Row';
+import useScrollPosition from '@react-hook/window-scroll';
 
 const HeaderRowT = styled(RowFixed)`
   position: fixed;
@@ -14,32 +14,44 @@ const HeaderRowT = styled(RowFixed)`
   ${({ theme }) => theme.mediaWidth.upToMedium`
     display: none;
   `};
-`
+`;
 
 export default function Polling() {
-  const footerStyles = { marginLeft: "0.5rem", marginRight: "0.5rem" }
-  const scrollY = useScrollPosition()
+  const footerStyles = { marginLeft: '0.5rem', marginRight: '0.5rem' };
+  const scrollY = useScrollPosition();
   if (scrollY <= 45)
     return (
       <HeaderRowT>
-        <ExternalLink style={footerStyles} href={"https://t.me/manifoldfinance"}>
+        <ExternalLink
+          style={footerStyles}
+          href={'https://t.me/manifoldfinance'}
+        >
           <TYPE.small>Telegram</TYPE.small>
         </ExternalLink>
-        <ExternalLink style={footerStyles} href={"https://medium.com/@trojanfinance"}>
+        <ExternalLink
+          style={footerStyles}
+          href={'https://medium.com/@trojanfinance'}
+        >
           <TYPE.small>Medium</TYPE.small>
         </ExternalLink>
-        <ExternalLink style={footerStyles} href={"https://twitter.com/FinanceTrojan"}>
+        <ExternalLink
+          style={footerStyles}
+          href={'https://twitter.com/FinanceTrojan'}
+        >
           <TYPE.small>Twitter</TYPE.small>
         </ExternalLink>
-        <ExternalLink style={footerStyles} href={"https://github.com/we-commit"}>
+        <ExternalLink
+          style={footerStyles}
+          href={'https://github.com/we-commit'}
+        >
           <TYPE.small>Github</TYPE.small>
         </ExternalLink>
-        <TYPE.small style={{ marginLeft: "0.5rem" }} color={"#6C7284"}>
+        <TYPE.small style={{ marginLeft: '0.5rem' }} color={'#6C7284'}>
           Proposals (Soon)
         </TYPE.small>
       </HeaderRowT>
-    )
+    );
   else {
-    return <></>
+    return <></>;
   }
 }

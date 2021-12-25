@@ -16,9 +16,14 @@ const saveBlock = async (doc: any) => {
 
 const updateBlock = async (blockHash: any, blockNumber: any, newData: any) => {
   try {
-    g.blocks.updateOne({ blockHash }, { ...newData, fullyUpdated: true }, {}, (e: any) => {
-      if (!e) _log.success('updatedBlock OK ', blockNumber);
-    });
+    g.blocks.updateOne(
+      { blockHash },
+      { ...newData, fullyUpdated: true },
+      {},
+      (e: any) => {
+        if (!e) _log.success('updatedBlock OK ', blockNumber);
+      },
+    );
   } catch (e: any) {
     _log.error('not updatedBlock', e);
   }

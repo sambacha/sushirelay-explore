@@ -23,7 +23,7 @@ const params = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  autoIndex: false
+  autoIndex: false,
 };
 
 process.on('uncaughtException', function (err) {
@@ -39,7 +39,9 @@ const startMongo = async (serverName: string): Promise<boolean> => {
   return new Promise((resolve) => {
     mongoose.connect(ENV.ATLAS_STRING || '', params, (e: any) => {
       if (!e) {
-        _log.success(`${serverName} | MONGO OK CONNECT | ${ENV.COLLECTION_PREFIX}`);
+        _log.success(
+          `${serverName} | MONGO OK CONNECT | ${ENV.COLLECTION_PREFIX}`,
+        );
         checkMongo(serverName);
       } else {
         _log.error(`${serverName} | MOGNO FAIL CONNECT | `, e.message);
@@ -66,17 +68,17 @@ const mongoUtils = {
 
   FIRST_QUERY: {
     limit: 20,
-    sort: { timestampTx: -1 }
+    sort: { timestampTx: -1 },
   },
 
   LAST_QUERY: {
     limit: 200,
-    sort: { timestampTx: 1 }
+    sort: { timestampTx: 1 },
   },
   INS_PEND: 'insert_pending_tx',
   DEL_PEND: 'delete_pending_tx',
   INS_CONF: 'insert_confirmed_tx',
-  ignoreAddressNamespace: ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2']
+  ignoreAddressNamespace: ['0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'],
 };
 
 const models = {
@@ -86,12 +88,12 @@ const models = {
     whales: mongoose.model(WHALES, WhalesSchema),
     hashes: mongoose.model(HASHES, HashSchema),
     tokens: mongoose.model(TOKENS, TokenSchema),
-    pools: mongoose.model(POOLS, PoolsSchema)
+    pools: mongoose.model(POOLS, PoolsSchema),
   },
   txM: {
     pending: mongoose.model(PENDING, TransactionSchema),
-    confirmed: mongoose.model(CONFIRMED, TransactionSchema)
-  }
+    confirmed: mongoose.model(CONFIRMED, TransactionSchema),
+  },
 };
 
 export { models, mongoUtils, startMongo };

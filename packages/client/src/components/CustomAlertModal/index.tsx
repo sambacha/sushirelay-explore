@@ -1,6 +1,6 @@
-import React from "react"
-import Modal from "../Modal"
-import { CustomAlert } from "components/SearchModal/CustomAlert"
+import React from 'react';
+import Modal from '../Modal';
+import { CustomAlert } from 'components/SearchModal/CustomAlert';
 
 export default function CustomAlertModal({
   isOpen,
@@ -12,14 +12,14 @@ export default function CustomAlertModal({
   links,
   buttonText,
 }: {
-  alertHeader: string
-  alertText: string
-  alertTitle: string
-  alertBody: string
-  buttonText: string
-  links: Array<string>
-  isOpen: boolean
-  onConfirm: () => void
+  alertHeader: string;
+  alertText: string;
+  alertTitle: string;
+  alertBody: string;
+  buttonText: string;
+  links: Array<string>;
+  isOpen: boolean;
+  onConfirm: () => void;
 }) {
   return (
     <Modal isOpen={isOpen} onDismiss={onConfirm} maxHeight={100}>
@@ -33,5 +33,5 @@ export default function CustomAlertModal({
         onConfirm={onConfirm}
       />
     </Modal>
-  )
+  );
 }

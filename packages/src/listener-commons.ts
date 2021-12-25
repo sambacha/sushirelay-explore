@@ -6,7 +6,12 @@ import { saveBlock, updateBlock } from './utils/mongo/saveBlock';
 import { pendingOld } from './utils/mongo/saveConfirmed';
 
 const { txM, g } = models;
-const { BLOCKNATIVE_API_URL, GAS_STATION_API_URL, BLOCKNATIVE_API_OPT, GAS_STATION_API_OPT } = KEYS;
+const {
+  BLOCKNATIVE_API_URL,
+  GAS_STATION_API_URL,
+  BLOCKNATIVE_API_OPT,
+  GAS_STATION_API_OPT,
+} = KEYS;
 const { ES_BLOCK } = ENV;
 
 const FIXER_INTERVAL: number = 60000 * 1;
@@ -58,7 +63,7 @@ const proccessBlock = async (number: number) => {
         blockNumber: block.number,
         timestampTx: nowMs(),
         blockHeader: block,
-        by: serverName
+        by: serverName,
       });
     }
   } catch (e: any) {
@@ -69,18 +74,20 @@ const proccessBlock = async (number: number) => {
 
 const proccessBlockQueue = async () => {
   try {
-    const b = await models.g.blocks.findOne({ fullyUpdated: false }, null, { sort: { timestampTx: -1 } });
+    const b = await models.g.blocks.findOne({ fullyUpdated: false }, null, {
+      sort: { timestampTx: -1 },
+    });
     if (b) {
       if (b.blockNumber) {
         const [gasnowResponse, bncResponseData] = await Promise.all([
           getBlockInfo(GAS_STATION_API_URL, GAS_STATION_API_OPT),
-          getBlockInfo(BLOCKNATIVE_API_URL, BLOCKNATIVE_API_OPT)
+          getBlockInfo(BLOCKNATIVE_API_URL, BLOCKNATIVE_API_OPT),
         ]);
 
         if (bncResponseData && gasnowResponse) {
           await updateBlock(b.blockHash, b.blockNumber, {
             responseData: bncResponseData,
-            responseDataGas: gasnowResponse
+            responseDataGas: gasnowResponse,
           });
         }
       }
@@ -97,9 +104,16 @@ const startFixerJustKill = async () => {
 
   let end = new Date();
   end.setMinutes(new Date().getMinutes() - old_txs);
-  _log.start('startFixer starting to fix all txs older than', old_txs, 'minutes');
+  _log.start(
+    'startFixer starting to fix all txs older than',
+    old_txs,
+    'minutes',
+  );
 
-  const _txM = await txM.pending.find({ timestampTx: { $lt: end.getTime() } }, {});
+  const _txM = await txM.pending.find(
+    { timestampTx: { $lt: end.getTime() } },
+    {},
+  );
   if (_txM) fixOlds(_txM);
 };
 
@@ -120,7 +134,11 @@ const startFixerG = async () => {
 
   let end = new Date();
   end.setMinutes(new Date().getMinutes() - old_g);
-  _log.start('startFixerG starting to delete all trash hashes older than', old_g, 'minutes');
+  _log.start(
+    'startFixerG starting to delete all trash hashes older than',
+    old_g,
+    'minutes',
+  );
 
   await g.hashes.deleteMany({ timestampTx: { $lt: end.getTime() } }, {});
   await g.trash.deleteMany({ timestampTx: { $lt: end.getTime() } }, {});

@@ -5,4 +5,11 @@ import { WhalesSchema } from './WhalesSchema';
 import { HashSchema } from './HashSchema';
 import { PoolsSchema } from './PoolsSchema';
 
-export { TokenSchema, TransactionSchema, BlockSchema, WhalesSchema, HashSchema, PoolsSchema };
+export {
+  TokenSchema,
+  TransactionSchema,
+  BlockSchema,
+  WhalesSchema,
+  HashSchema,
+  PoolsSchema,
+};

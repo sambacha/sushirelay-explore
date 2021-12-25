@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
-import { TYPE, ExternalLink } from "../../theme"
-import { Zap } from "react-feather"
+import React from 'react';
+import styled from 'styled-components';
+import { TYPE, ExternalLink } from '../../theme';
+import { Zap } from 'react-feather';
 
 const StyledPolling = styled.div`
   position: fixed;
@@ -20,17 +20,21 @@ const StyledPolling = styled.div`
   ${({ theme }) => theme.mediaWidth.upToLarge`
     display: none;
   `}
-`
+`;
 export default function FooterPooling() {
-  const footerStyles = { marginLeft: "0.5rem", marginRight: "0.5rem", fontSize: "11px" }
+  const footerStyles = {
+    marginLeft: '0.5rem',
+    marginRight: '0.5rem',
+    fontSize: '11px',
+  };
 
   return (
     <StyledPolling>
-      <ExternalLink style={footerStyles} href={"https://www.blocknative.com/"}>
+      <ExternalLink style={footerStyles} href={'https://www.blocknative.com/'}>
         <TYPE.blue>
           <Zap size={11} /> Powered by Blocknative
         </TYPE.blue>
       </ExternalLink>
     </StyledPolling>
-  )
+  );
 }

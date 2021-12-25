@@ -9,8 +9,8 @@ const createPending = async (tx: ITrojanTx, message: string) => {
       ...tx,
       notes: {
         message,
-        timestampTx
-      }
+        timestampTx,
+      },
     }).save((e: any) => {
       if (!e) _log.info('New Pending Saved', '|', tx.hash, '|', message);
       if (e) _log.error(e);

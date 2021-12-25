@@ -1,13 +1,13 @@
-import { Token, Price } from "@uniswap/sdk-core"
-import { tickToPrice } from "@uniswap/v3-sdk"
+import { Token, Price } from '@uniswap/sdk-core';
+import { tickToPrice } from '@uniswap/v3-sdk';
 
 export function getTickToPrice(
   baseToken: Token | undefined,
   quoteToken: Token | undefined,
-  tick: number | undefined
+  tick: number | undefined,
 ): Price<Token, Token> | undefined {
   if (!baseToken || !quoteToken || !tick) {
-    return undefined
+    return undefined;
   }
-  return tickToPrice(baseToken, quoteToken, tick)
+  return tickToPrice(baseToken, quoteToken, tick);
 }

@@ -14,9 +14,9 @@ const PoolsSchema = new Schema(
     isV2Sushi: Boolean,
     state: {},
     immutables: {},
-    decoded: {}
+    decoded: {},
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { PoolsSchema };

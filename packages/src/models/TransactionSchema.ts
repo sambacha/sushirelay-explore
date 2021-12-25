@@ -77,7 +77,7 @@ const TransactionSchema = new Schema(
 
     // CUSTOM DATA
     links: {
-      etherscan: String
+      etherscan: String,
     },
     fromTokenAddress: String,
     toTokenAddress: String,
@@ -94,10 +94,10 @@ const TransactionSchema = new Schema(
     // wich server, when
     notes: {
       message: String,
-      timestampTx: Number
-    }
+      timestampTx: Number,
+    },
   },
-  { autoIndex: false }
+  { autoIndex: false },
 );
 
 export { TransactionSchema, ITrojanTx };

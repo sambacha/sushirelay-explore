@@ -10,7 +10,12 @@ const { g } = models;
 const { hashes } = g;
 const pName = 'qnPending_v2';
 
-export const handleSwap = async (tx: ITrojanTx, dexSpace: string, directConfirm: boolean, providers: Array<any>) => {
+export const handleSwap = async (
+  tx: ITrojanTx,
+  dexSpace: string,
+  directConfirm: boolean,
+  providers: Array<any>,
+) => {
   try {
     const { checkedPath } = tx.mempoolData;
     const tks = await getTokens(checkedPath, pName, dexSpace, providers);
@@ -30,14 +35,14 @@ export const handleSwap = async (tx: ITrojanTx, dexSpace: string, directConfirm:
           checkedPath,
           mempoolData: {
             ...tx.mempoolData,
-            ...mempoolData
-          }
+            ...mempoolData,
+          },
         };
         if (directConfirm) {
           new hashes({
             hash: tx.hash,
             txHash: tx.hash,
-            timestampTx: nowMs()
+            timestampTx: nowMs(),
           }).save(async (e: any) => {
             if (!e) {
               createConfirm(toCreate, 'directConfirm');
@@ -47,10 +52,20 @@ export const handleSwap = async (tx: ITrojanTx, dexSpace: string, directConfirm:
           createPending(toCreate, dexSpace);
         }
       } else {
-        _log.warn('handleSwap', dexSpace, tx.hash, 'no mempool data after compute swap?');
+        _log.warn(
+          'handleSwap',
+          dexSpace,
+          tx.hash,
+          'no mempool data after compute swap?',
+        );
       }
     } else {
-      _log.warn('handleSwap', dexSpace, tx.hash, 'not tks or tks.length !== checkedPath.length');
+      _log.warn(
+        'handleSwap',
+        dexSpace,
+        tx.hash,
+        'not tks or tks.length !== checkedPath.length',
+      );
     }
   } catch (e: any) {
     _log.error('handleSwap', dexSpace, tx.hash, e);

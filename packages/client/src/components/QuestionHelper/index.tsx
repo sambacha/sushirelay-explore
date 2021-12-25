@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react"
-import styled from "styled-components/macro"
-import Tooltip from "../Tooltip"
+import React, { useCallback, useState } from 'react';
+import styled from 'styled-components/macro';
+import Tooltip from '../Tooltip';
 
 const QuestionWrapper = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const QuestionWrapper = styled.div`
   :focus {
     opacity: 0.7;
   }
-`
+`;
 
 const LightQuestionWrapper = styled.div`
   display: flex;
@@ -43,42 +43,55 @@ const LightQuestionWrapper = styled.div`
   :focus {
     opacity: 0.7;
   }
-`
+`;
 
 const QuestionMark = styled.span`
   font-size: 14px;
-`
+`;
 
-export default function QuestionHelper({ text }: { text: string; size?: number }) {
-  const [show, setShow] = useState<boolean>(false)
+export default function QuestionHelper({
+  text,
+}: {
+  text: string;
+  size?: number;
+}) {
+  const [show, setShow] = useState<boolean>(false);
 
-  const open = useCallback(() => setShow(true), [setShow])
-  const close = useCallback(() => setShow(false), [setShow])
+  const open = useCallback(() => setShow(true), [setShow]);
+  const close = useCallback(() => setShow(false), [setShow]);
 
   return (
-    <span style={{ marginLeft: 4, display: "flex", alignItems: "center" }}>
+    <span style={{ marginLeft: 4, display: 'flex', alignItems: 'center' }}>
       <Tooltip text={text} show={show}>
-        <QuestionWrapper onClick={open} onMouseEnter={open} onMouseLeave={close}>
+        <QuestionWrapper
+          onClick={open}
+          onMouseEnter={open}
+          onMouseLeave={close}
+        >
           <QuestionMark>?</QuestionMark>
         </QuestionWrapper>
       </Tooltip>
     </span>
-  )
+  );
 }
 
 export function LightQuestionHelper({ text }: { text: string }) {
-  const [show, setShow] = useState<boolean>(false)
+  const [show, setShow] = useState<boolean>(false);
 
-  const open = useCallback(() => setShow(true), [setShow])
-  const close = useCallback(() => setShow(false), [setShow])
+  const open = useCallback(() => setShow(true), [setShow]);
+  const close = useCallback(() => setShow(false), [setShow]);
 
   return (
     <span style={{ marginLeft: 4 }}>
       <Tooltip text={text} show={show}>
-        <LightQuestionWrapper onClick={open} onMouseEnter={open} onMouseLeave={close}>
+        <LightQuestionWrapper
+          onClick={open}
+          onMouseEnter={open}
+          onMouseLeave={close}
+        >
           <QuestionMark>?</QuestionMark>
         </LightQuestionWrapper>
       </Tooltip>
     </span>
-  )
+  );
 }

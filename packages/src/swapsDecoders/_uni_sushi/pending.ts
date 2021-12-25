@@ -1,5 +1,9 @@
 import { _log, ROUTERS } from '../../utils/configs/utils';
-import { iSushiV2Router, iUniV2Router, iUniV3Router } from '../../utils/web3/abis-interfaces';
+import {
+  iSushiV2Router,
+  iUniV2Router,
+  iUniV3Router,
+} from '../../utils/web3/abis-interfaces';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { _V3_FUNC_ALLOWED_METHODS, _MULTICALL } from '../../utils/web3/utils';
 import { handleMultiSwap as handleMultiSwapV3 } from './_v3/handleMultiSwap';
@@ -11,7 +15,12 @@ const dexSpacev2 = 'v2';
 const dexSpacev3 = 'v3';
 const dexSpacev2sh = 'v2sh';
 
-export const proccessPending = async (tx: TransactionResponse, whaleData: any, directConfirm: boolean, providers: Array<any>) => {
+export const proccessPending = async (
+  tx: TransactionResponse,
+  whaleData: any,
+  directConfirm: boolean,
+  providers: Array<any>,
+) => {
   try {
     const isUniSpaceV2 = tx.to === ROUTERS.UNIV2;
     const isSushiSpaceV2 = tx.to === ROUTERS.SUSHIV2;
@@ -40,14 +49,20 @@ export const proccessPending = async (tx: TransactionResponse, whaleData: any, d
             ...checkTx(tx, whaleData, false, true, false),
             mempoolData: {
               txMethod,
-              decodedData: parsedTx.args[0]
-            }
+              decodedData: parsedTx.args[0],
+            },
           };
-          txMethod === _MULTICALL ? handleMultiSwapV3(nTx, dexSpace, directConfirm, providers) : handleSwapV3(nTx, dexSpace, directConfirm, providers);
+          txMethod === _MULTICALL
+            ? handleMultiSwapV3(nTx, dexSpace, directConfirm, providers)
+            : handleSwapV3(nTx, dexSpace, directConfirm, providers);
         } else if (txMethod.includes('swap')) {
           const nTx = {
             ...checkTx(tx, whaleData, isUniSpaceV2, false, isSushiSpaceV2),
-            mempoolData: { txMethod, decodedData: parsedTx.args, checkedPath: parsedTx.args['path'] }
+            mempoolData: {
+              txMethod,
+              decodedData: parsedTx.args,
+              checkedPath: parsedTx.args['path'],
+            },
           };
           handleSwapV2(nTx, dexSpace, directConfirm, providers);
         }

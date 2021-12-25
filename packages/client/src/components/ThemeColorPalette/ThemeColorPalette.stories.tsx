@@ -1,14 +1,14 @@
-import { Story } from "@storybook/react/types-6-0"
-import React from "react"
-import Component from "./index"
+import { Story } from '@storybook/react/types-6-0';
+import React from 'react';
+import Component from './index';
 
 export default {
-  title: "ThemeColorPalette",
-}
+  title: 'ThemeColorPalette',
+};
 
 const Template: Story<any> = (_args: any, context: Record<string, any>) => {
-  const isDarkMode = context.globals.theme === "dark"
-  return <Component isDarkMode={isDarkMode} />
-}
+  const isDarkMode = context.globals.theme === 'dark';
+  return <Component isDarkMode={isDarkMode} />;
+};
 
-export const Palette = Template.bind({})
+export const Palette = Template.bind({});

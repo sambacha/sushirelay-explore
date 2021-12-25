@@ -1,13 +1,18 @@
-import { Currency, currencyEquals, Percent, TradeType } from "@uniswap/sdk-core"
-import { Trade as V2Trade } from "@uniswap/v2-sdk"
-import { Trade as V3Trade } from "@uniswap/v3-sdk"
-import React, { useCallback, useMemo } from "react"
+import {
+  Currency,
+  currencyEquals,
+  Percent,
+  TradeType,
+} from '@uniswap/sdk-core';
+import { Trade as V2Trade } from '@uniswap/v2-sdk';
+import { Trade as V3Trade } from '@uniswap/v3-sdk';
+import React, { useCallback, useMemo } from 'react';
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
   TransactionErrorContent,
-} from "../TransactionConfirmationModal"
-import SwapModalFooter from "./SwapModalFooter"
-import SwapModalHeader from "./SwapModalHeader"
+} from '../TransactionConfirmationModal';
+import SwapModalFooter from './SwapModalFooter';
+import SwapModalHeader from './SwapModalHeader';
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it
@@ -15,17 +20,26 @@ import SwapModalHeader from "./SwapModalHeader"
  */
 function tradeMeaningfullyDiffers(
   ...args:
-    | [V2Trade<Currency, Currency, TradeType>, V2Trade<Currency, Currency, TradeType>]
-    | [V3Trade<Currency, Currency, TradeType>, V3Trade<Currency, Currency, TradeType>]
+    | [
+        V2Trade<Currency, Currency, TradeType>,
+        V2Trade<Currency, Currency, TradeType>,
+      ]
+    | [
+        V3Trade<Currency, Currency, TradeType>,
+        V3Trade<Currency, Currency, TradeType>,
+      ]
 ): boolean {
-  const [tradeA, tradeB] = args
+  const [tradeA, tradeB] = args;
   return (
     tradeA.tradeType !== tradeB.tradeType ||
     !currencyEquals(tradeA.inputAmount.currency, tradeB.inputAmount.currency) ||
     !tradeA.inputAmount.equalTo(tradeB.inputAmount) ||
-    !currencyEquals(tradeA.outputAmount.currency, tradeB.outputAmount.currency) ||
+    !currencyEquals(
+      tradeA.outputAmount.currency,
+      tradeB.outputAmount.currency,
+    ) ||
     !tradeA.outputAmount.equalTo(tradeB.outputAmount)
-  )
+  );
 }
 
 export default function ConfirmSwapModal({
@@ -41,17 +55,23 @@ export default function ConfirmSwapModal({
   attemptingTxn,
   txHash,
 }: {
-  isOpen: boolean
-  trade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
-  originalTrade: V2Trade<Currency, Currency, TradeType> | V3Trade<Currency, Currency, TradeType> | undefined
-  attemptingTxn: boolean
-  txHash: string | undefined
-  recipient: string | null
-  allowedSlippage: Percent
-  onAcceptChanges: () => void
-  onConfirm: () => void
-  swapErrorMessage: string | undefined
-  onDismiss: () => void
+  isOpen: boolean;
+  trade:
+    | V2Trade<Currency, Currency, TradeType>
+    | V3Trade<Currency, Currency, TradeType>
+    | undefined;
+  originalTrade:
+    | V2Trade<Currency, Currency, TradeType>
+    | V3Trade<Currency, Currency, TradeType>
+    | undefined;
+  attemptingTxn: boolean;
+  txHash: string | undefined;
+  recipient: string | null;
+  allowedSlippage: Percent;
+  onAcceptChanges: () => void;
+  onConfirm: () => void;
+  swapErrorMessage: string | undefined;
+  onDismiss: () => void;
 }) {
   const showAcceptChanges = useMemo(
     () =>
@@ -61,10 +81,10 @@ export default function ConfirmSwapModal({
           tradeMeaningfullyDiffers(trade, originalTrade)) ||
           (trade instanceof V3Trade &&
             originalTrade instanceof V3Trade &&
-            tradeMeaningfullyDiffers(trade, originalTrade))
+            tradeMeaningfullyDiffers(trade, originalTrade)),
       ),
-    [originalTrade, trade]
-  )
+    [originalTrade, trade],
+  );
 
   const modalHeader = useCallback(() => {
     return trade ? (
@@ -75,8 +95,8 @@ export default function ConfirmSwapModal({
         showAcceptChanges={showAcceptChanges}
         onAcceptChanges={onAcceptChanges}
       />
-    ) : null
-  }, [allowedSlippage, onAcceptChanges, recipient, showAcceptChanges, trade])
+    ) : null;
+  }, [allowedSlippage, onAcceptChanges, recipient, showAcceptChanges, trade]);
 
   const modalBottom = useCallback(() => {
     return trade ? (
@@ -86,18 +106,23 @@ export default function ConfirmSwapModal({
         disabledConfirm={showAcceptChanges}
         swapErrorMessage={swapErrorMessage}
       />
-    ) : null
-  }, [onConfirm, showAcceptChanges, swapErrorMessage, trade])
+    ) : null;
+  }, [onConfirm, showAcceptChanges, swapErrorMessage, trade]);
 
   // text to show while loading
   const pendingText = `Swapping ${trade?.inputAmount?.toSignificant(6)} ${
     trade?.inputAmount?.currency?.symbol
-  } for ${trade?.outputAmount?.toSignificant(6)} ${trade?.outputAmount?.currency?.symbol}`
+  } for ${trade?.outputAmount?.toSignificant(6)} ${
+    trade?.outputAmount?.currency?.symbol
+  }`;
 
   const confirmationContent = useCallback(
     () =>
       swapErrorMessage ? (
-        <TransactionErrorContent onDismiss={onDismiss} message={swapErrorMessage} />
+        <TransactionErrorContent
+          onDismiss={onDismiss}
+          message={swapErrorMessage}
+        />
       ) : (
         <ConfirmationModalContent
           title="Confirm Swap"
@@ -106,8 +131,8 @@ export default function ConfirmSwapModal({
           bottomContent={modalBottom}
         />
       ),
-    [onDismiss, modalBottom, modalHeader, swapErrorMessage]
-  )
+    [onDismiss, modalBottom, modalHeader, swapErrorMessage],
+  );
 
   return (
     <TransactionConfirmationModal
@@ -119,5 +144,5 @@ export default function ConfirmSwapModal({
       pendingText={pendingText}
       currencyToAdd={trade?.outputAmount.currency}
     />
-  )
+  );
 }

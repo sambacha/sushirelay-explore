@@ -1,15 +1,15 @@
-const express = require("express")
-const path = require("path")
+const express = require('express');
+const path = require('path');
 
-const app = express()
-const distDir = path.join(__dirname, "client_build/")
-const port = process.env.PORT || 8080
+const app = express();
+const distDir = path.join(__dirname, 'client_build/');
+const port = process.env.PORT || 8080;
 
-app.use(express.static(distDir))
+app.use(express.static(distDir));
 
 // Handle get requests to return the build app.
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(distDir, "index.html"))
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(distDir, 'index.html'));
+});
 
-app.listen(port)
+app.listen(port);
