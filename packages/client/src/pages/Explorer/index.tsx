@@ -39,19 +39,19 @@ import { Wrapper, UniIcon, ButtonRefrash, ButtonRefrashPad } from '../styled';
 import { SocketContext } from '../context/socket';
 import { ITransaction } from 'types/trojan/tx-model';
 import {
-  useTrojanBlockActionHandlers,
-  useTrojanBlockState,
-} from 'state/trojanBlocks/hooks';
+  useOpenMevBlockActionHandlers,
+  useOpenMevBlockState,
+} from 'state/openmevBlocks/hooks';
 import {
   isTransactionRecent,
   newTransactionsFirst,
   useDefaultsFromURLSearch,
-  useAllPendingTrojanTxs,
-  useAllConfirmedTrojanTxs,
-  useTrojanTxsActions,
-  useDerivedTrojanTxsInfo,
-  useTrojanTxsState,
-} from 'state/trojanTxs/hooks';
+  useAllPendingopenmevTxs,
+  useAllConfirmedopenmevTxs,
+  useopenmevTxsActions,
+  useDerivedopenmevTxsInfo,
+  useopenmevTxsState,
+} from 'state/openmevTxs/hooks';
 
 const defaultSpaces = {
   isV2: true,
@@ -73,10 +73,10 @@ export default function Explorer({ history }: RouteComponentProps) {
     onLoadConfirmeds,
     onCurrencySelection,
     onClearStateTx,
-  } = useTrojanTxsActions();
+  } = useopenmevTxsActions();
 
-  const { onSetBlock } = useTrojanBlockActionHandlers();
-  const { block } = useTrojanBlockState();
+  const { onSetBlock } = useOpenMevBlockActionHandlers();
+  const { block } = useOpenMevBlockState();
   const [isCopied, setCopied] = useCopyClipboard();
 
   const [pageLink, setPageLink] = useState<string>(
@@ -98,14 +98,14 @@ export default function Explorer({ history }: RouteComponentProps) {
   );
 
   // Pendings
-  const allPendingTxs = useAllPendingTrojanTxs();
+  const allPendingTxs = useAllPendingopenmevTxs();
   const sortedPendingTransactions = useMemo(() => {
     const txs = Object.values(allPendingTxs);
     return txs.filter(isTransactionRecent).sort(newTransactionsFirst);
   }, [allPendingTxs]);
 
   // Confirmed
-  const allConfirmedTxs = useAllConfirmedTrojanTxs();
+  const allConfirmedTxs = useAllConfirmedopenmevTxs();
   const sortedConfirmedTransactions = useMemo(() => {
     const txs = Object.values(allConfirmedTxs);
     return txs.filter(isTransactionRecent).sort(newTransactionsFirst);
@@ -114,8 +114,8 @@ export default function Explorer({ history }: RouteComponentProps) {
   /***
    *  selectedCurrencyId from state
    */
-  const { selectedCurrencyId } = useTrojanTxsState();
-  const { currency } = useDerivedTrojanTxsInfo();
+  const { selectedCurrencyId } = useopenmevTxsState();
+  const { currency } = useDerivedopenmevTxsInfo();
 
   const handleConfirmTokenWarning = useCallback(() => {
     setDismissTokenWarning(true);

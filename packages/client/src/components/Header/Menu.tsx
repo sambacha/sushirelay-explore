@@ -135,7 +135,7 @@ const InternalMenuItem = styled(Link)`
   }
 `;
 
-const CODE_LINK = 'https://github.com/Uniswap/uniswap-interface';
+const CODE_LINK = 'https://github.com/manifoldfinance/sushirelay';
 
 export default function Menu() {
   const node = useRef<HTMLDivElement>();
@@ -152,23 +152,23 @@ export default function Menu() {
 
       {open && (
         <MenuFlyout>
-          <MenuItem href="https://uniswap.org/">
+          <MenuItem href="https://sushi.com">
             <Info size={14} />
             <div>About</div>
           </MenuItem>
-          <MenuItem href="https://docs.uniswap.org/">
+          <MenuItem href="https://app.sushi.com/">
             <BookOpen size={14} />
-            <div>Docs</div>
+            <div>DApp</div>
           </MenuItem>
           <MenuItem href={CODE_LINK}>
             <Code size={14} />
             <div>Code</div>
           </MenuItem>
-          <MenuItem href="https://Telegram.gg/FCfyBSbCU5">
+          <MenuItem href="https://analytics.sushi.com/tokens/0xd084944d3c05cd115c09d072b9f44ba3e0e45921">
             <MessageCircle size={14} />
-            <div>Telegram</div>
+            <div>FOLD</div>
           </MenuItem>
-          <MenuItem href="https://info.uniswap.org/">
+          <MenuItem href="https://analytics.sushi.com/">
             <PieChart size={14} />
             <div>Analytics</div>
           </MenuItem>

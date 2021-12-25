@@ -4,7 +4,7 @@ import { useTransactionAdder } from '../state/transactions/hooks';
 import { useCurrencyBalance } from '../state/wallet/hooks';
 import { useActiveWeb3React } from './web3';
 import { useWETHContract } from './useContract';
-import { tryParseAmount } from 'state/trojanTxs/hooks';
+import { tryParseAmount } from 'state/openmevTxs/hooks';
 
 export enum WrapType {
   NOT_APPLICABLE,

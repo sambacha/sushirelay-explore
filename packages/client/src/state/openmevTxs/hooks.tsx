@@ -20,31 +20,33 @@ import {
   selectCurrency,
 } from './actions';
 
-export function useTrojanTxsState(): AppState['trojanTxs'] {
-  return useSelector<AppState, AppState['trojanTxs']>(
-    (state) => state.trojanTxs,
+export function useopenmevTxsState(): AppState['openmevTxs'] {
+  return useSelector<AppState, AppState['openmevTxs']>(
+    (state) => state.openmevTxs,
   );
 }
 
 // returns all the transactions for the current chain
-export function useAllPendingTrojanTxs(): { [txHash: string]: ITransaction } {
-  const state = useSelector<AppState, AppState['trojanTxs']>(
-    (state) => state.trojanTxs,
+export function useAllPendingopenmevTxs(): { [txHash: string]: ITransaction } {
+  const state = useSelector<AppState, AppState['openmevTxs']>(
+    (state) => state.openmevTxs,
   );
 
   return state.pendings;
 }
 
 // returns all the transactions for the current chain
-export function useAllConfirmedTrojanTxs(): { [txHash: string]: ITransaction } {
-  const state = useSelector<AppState, AppState['trojanTxs']>(
-    (state) => state.trojanTxs,
+export function useAllConfirmedopenmevTxs(): {
+  [txHash: string]: ITransaction;
+} {
+  const state = useSelector<AppState, AppState['openmevTxs']>(
+    (state) => state.openmevTxs,
   );
 
   return state.confirmeds;
 }
 
-export function useTrojanTxsActions(): {
+export function useopenmevTxsActions(): {
   onPendingTxRemoved: (tx: ITransaction) => void;
   onPendingTxAdded: (tx: ITransaction) => void;
   onConfirmedTxAdded: (tx: ITransaction) => void;
@@ -134,10 +136,10 @@ export function isTransactionRecent(tx: ITransaction): boolean {
 }
 
 // from the current swap inputs, compute the best trade and return it.
-export function useDerivedTrojanTxsInfo(): {
+export function useDerivedopenmevTxsInfo(): {
   currency: Currency | null;
 } {
-  const { selectedCurrencyId } = useTrojanTxsState();
+  const { selectedCurrencyId } = useopenmevTxsState();
   const inputCurrency = useCurrency(selectedCurrencyId);
 
   if (inputCurrency && inputCurrency.isEther === false) {

@@ -30,24 +30,24 @@ export default function Polling() {
         </ExternalLink>
         <ExternalLink
           style={footerStyles}
-          href={'https://medium.com/@trojanfinance'}
+          href={'https:/forums.manifoldfinance.com'}
         >
-          <TYPE.small>Medium</TYPE.small>
+          <TYPE.small>Forums</TYPE.small>
         </ExternalLink>
         <ExternalLink
           style={footerStyles}
-          href={'https://twitter.com/FinanceTrojan'}
+          href={'https://twitter.com/foldfinance'}
         >
           <TYPE.small>Twitter</TYPE.small>
         </ExternalLink>
         <ExternalLink
           style={footerStyles}
-          href={'https://github.com/we-commit'}
+          href={'https://github.com/manifoldfinance'}
         >
           <TYPE.small>Github</TYPE.small>
         </ExternalLink>
         <TYPE.small style={{ marginLeft: '0.5rem' }} color={'#6C7284'}>
-          Proposals (Soon)
+          Bar Butler (Soon)
         </TYPE.small>
       </HeaderRowT>
     );

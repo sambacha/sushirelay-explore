@@ -9,8 +9,8 @@ import lists from './lists/reducer';
 import multicall from './multicall/reducer';
 
 import freshTokens from './freshTokens/reducer';
-import trojanTxs from './trojanTxs/reducer';
-import trojanBlocks from './trojanBlocks/reducer';
+import openmevTxs from './openmevTxs/reducer';
+import openmevBlocks from './openmevBlocks/reducer';
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists'];
 
@@ -23,8 +23,8 @@ const store = configureStore({
     lists,
 
     freshTokens,
-    trojanTxs,
-    trojanBlocks,
+    openmevTxs,
+    openmevBlocks,
   },
   middleware: [
     ...getDefaultMiddleware({ thunk: false }),

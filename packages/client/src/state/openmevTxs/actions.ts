@@ -1,25 +1,25 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ITransaction } from 'types/trojan/tx-model';
 
-export const addPending = createAction<ITransaction>('trojanTxs/addPending');
+export const addPending = createAction<ITransaction>('openmevTxs/addPending');
 export const removePending = createAction<ITransaction>(
-  'trojanTxs/removePending',
+  'openmevTxs/removePending',
 );
 
 export const addConfirmed = createAction<ITransaction>(
-  'trojanTxs/addConfirmed',
+  'openmevTxs/addConfirmed',
 );
 export const removeConfirmed = createAction<ITransaction>(
-  'trojanTxs/removeConfirmed',
+  'openmevTxs/removeConfirmed',
 );
 
 export const loadPendings = createAction<Array<ITransaction>>(
-  'trojanTxs/loadPendings',
+  'openmevTxs/loadPendings',
 );
 export const loadConfirmed = createAction<Array<ITransaction>>(
-  'trojanTxs/loadConfirmed',
+  'openmevTxs/loadConfirmed',
 );
 
-export const selectCurrency = createAction<string>('trojanTxs/selectCurrency');
+export const selectCurrency = createAction<string>('openmevTxs/selectCurrency');
 
-export const resetStateTx = createAction<void>('trojanTxs/resetStateTx');
+export const resetStateTx = createAction<void>('openmevTxs/resetStateTx');

@@ -131,8 +131,8 @@ function getRelevantState(): null | keyof AppState {
   }
   const pieces = path.substring(2).split(/[\/\\?]/);
   switch (pieces[0]) {
-    case 'trojanTxs':
-      return 'trojanTxs';
+    case 'openmevTxs':
+      return 'openmevTxs';
   }
   return null;
 }

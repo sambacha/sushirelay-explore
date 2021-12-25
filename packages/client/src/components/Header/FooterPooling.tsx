@@ -30,9 +30,9 @@ export default function FooterPooling() {
 
   return (
     <StyledPolling>
-      <ExternalLink style={footerStyles} href={'https://www.blocknative.com/'}>
+      <ExternalLink style={footerStyles} href={'https://www.manifoldfinance/'}>
         <TYPE.blue>
-          <Zap size={11} /> Powered by Blocknative
+          <Zap size={11} /> Powered by Manifold
         </TYPE.blue>
       </ExternalLink>
     </StyledPolling>

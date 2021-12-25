@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, AppState } from '../index';
 import { clearBlock, setBlock } from './actions';
 
-export function useTrojanBlockState(): AppState['trojanBlocks'] {
-  return useSelector<AppState, AppState['trojanBlocks']>(
-    (state) => state.trojanBlocks,
+export function useOpenMevBlockState(): AppState['openmevBlocks'] {
+  return useSelector<AppState, AppState['openmevBlocks']>(
+    (state) => state.openmevBlocks,
   );
 }
 
-export function useTrojanBlockActionHandlers(): {
+export function useOpenMevBlockActionHandlers(): {
   onClearBlock: () => void;
   onSetBlock: (block: any) => void;
 } {

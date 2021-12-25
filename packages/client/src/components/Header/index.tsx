@@ -17,7 +17,7 @@ import Row, { RowFixed } from '../Row';
 import useUSDCPrice from 'hooks/useUSDCPrice';
 import { SmallOnly } from 'theme';
 import { formatPrice } from 'utils/formatTokenAmount';
-import { useTrojanBlockState } from 'state/trojanBlocks/hooks';
+import { useOpenMevBlockState } from 'state/openmevBlocks/hooks';
 import { MouseoverTooltip } from 'components/Tooltip';
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
@@ -218,7 +218,7 @@ export const StyledMenuButton = styled.button`
 export default function Header() {
   const [darkMode, toggleDarkMode] = useDarkModeManager();
   const scrollY = useScrollPosition();
-  const { block } = useTrojanBlockState();
+  const { block } = useOpenMevBlockState();
   const priceUSD = useUSDCPrice(ETHER);
   const REACT_APP_APP_IS_OFFLINE: string =
     process.env.REACT_APP_APP_IS_OFFLINE || 'false';
