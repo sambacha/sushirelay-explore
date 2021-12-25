@@ -1,9 +1,9 @@
 {
-  "name": "turborepo-basic-shared",
+  "name": "sushiswap-relay-turborepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
+    "app/*",
     "packages/*"
   ],
   "scripts": {
